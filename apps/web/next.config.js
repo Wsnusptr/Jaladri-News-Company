@@ -2,7 +2,17 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   transpilePackages: ['@repo/db', 'ui'],
-  
+
+  // Prisma configuration for monorepo (Next.js 15)
+  serverExternalPackages: ['@prisma/client', 'prisma'],
+
+  webpack: (config, { isServer }) => {
+    if (isServer) {
+      config.externals.push('@prisma/client')
+    }
+    return config
+  },
+
   // Fix for Windows generateBuildId crypto issue
   generateBuildId: async () => {
     if (process.env.NODE_ENV === 'production') {
