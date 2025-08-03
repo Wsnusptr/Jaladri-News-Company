@@ -1,0 +1,15 @@
+/* Custom styles for ads */
+.ad-video-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.ad-video-container video {
+  transition: transform 0.3s ease;
+}
+
+.ad-video-container:hover video {
+  transform: scale(1.05);
+}
+
+/* Responsive adjustments */

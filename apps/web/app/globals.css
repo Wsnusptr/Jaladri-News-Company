@@ -1,0 +1,321 @@
+/* Microsoft Edge-Inspired News Website */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Microsoft Edge Design System - CSS Variables */
+:root {
+  /* Microsoft Edge Light Theme */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f3f2f1;
+  --bg-tertiary: #faf9f8;
+  --bg-glass: rgba(255, 255, 255, 0.8);
+  --bg-card: rgba(255, 255, 255, 0.95);
+  --bg-hover: rgba(0, 0, 0, 0.04);
+  
+  --text-primary: #323130;
+  --text-secondary: #605e5c;
+  --text-tertiary: #8a8886;
+  --text-accent: #0078d4;
+  
+  --accent-primary: #0078d4;
+  --accent-hover: #106ebe;
+  --accent-light: rgba(0, 120, 212, 0.1);
+  --accent-gradient: linear-gradient(135deg, #0078d4 0%, #00bcf2 100%);
+  
+  --border-light: rgba(0, 0, 0, 0.08);
+  --border-medium: rgba(0, 0, 0, 0.12);
+  --border-accent: rgba(0, 120, 212, 0.2);
+  
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+  --shadow-xl: 0 16px 40px rgba(0, 0, 0, 0.16);
+  
+  /* Particle Animation Colors */
+  --particle-primary: 0, 120, 212;
+  --particle-secondary: 0, 188, 242;
+  --particle-tertiary: 102, 102, 102;
+
+  /* Microsoft Fluent Motion */
+  --transition-fast: 150ms cubic-bezier(0.1, 0.9, 0.2, 1);
+  --transition-medium: 300ms cubic-bezier(0.1, 0.9, 0.2, 1);
+  --transition-slow: 500ms cubic-bezier(0.1, 0.9, 0.2, 1);
+  --transition-bounce: 400ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+  /* Layout & Spacing */
+  --container-padding: 1.5rem;
+  --content-spacing: 2rem;
+  --card-spacing: 1.25rem;
+  --border-radius: 8px;
+  --border-radius-lg: 12px;
+  --border-radius-xl: 16px;
+
+  /* Glass Morphism */
+  --glass-bg: rgba(255, 255, 255, 0.25);
+  --glass-border: rgba(255, 255, 255, 0.18);
+  --backdrop-blur: blur(16px);
+}
+
+/* Microsoft Edge Dark Theme */
+.dark {
+  --bg-primary: #1e1e1e;
+  --bg-secondary: #2d2d30;
+  --bg-tertiary: #252526;
+  --bg-glass: rgba(30, 30, 30, 0.8);
+  --bg-card: rgba(45, 45, 48, 0.95);
+  --bg-hover: rgba(255, 255, 255, 0.06);
+  
+  --text-primary: #ffffff;
+  --text-secondary: #cccccc;
+  --text-tertiary: #969696;
+  --text-accent: #4fc3f7;
+  
+  --accent-primary: #4fc3f7;
+  --accent-hover: #29b6f6;
+  --accent-light: rgba(79, 195, 247, 0.15);
+  --accent-gradient: linear-gradient(135deg, #4fc3f7 0%, #29b6f6 100%);
+  
+  --border-light: rgba(255, 255, 255, 0.08);
+  --border-medium: rgba(255, 255, 255, 0.12);
+  --border-accent: rgba(79, 195, 247, 0.3);
+  
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --shadow-xl: 0 16px 40px rgba(0, 0, 0, 0.5);
+  
+  /* Dark Particle Colors */
+  --particle-primary: 79, 195, 247;
+  --particle-secondary: 41, 182, 246;
+  --particle-tertiary: 150, 150, 150;
+
+  /* Dark Glass Morphism */
+  --glass-bg: rgba(30, 30, 30, 0.25);
+  --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+/* Base Styles with Microsoft Edge Aesthetics */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+  transition: background-color var(--transition-medium), color var(--transition-medium);
+  overflow-x: hidden;
+}
+
+/* Microsoft Fluent Design Components */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: var(--backdrop-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.edge-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-medium);
+}
+
+.edge-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--border-accent);
+}
+
+.edge-button {
+  background: var(--accent-gradient);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-medium);
+  box-shadow: var(--shadow-sm);
+}
+
+.edge-button:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.edge-button:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Enhanced Animation Classes */
+.fade-in {
+  animation: fadeIn var(--transition-medium) ease-out;
+}
+
+.slide-up {
+  animation: slideUp var(--transition-medium) ease-out;
+}
+
+.slide-in-left {
+  animation: slideInLeft var(--transition-medium) ease-out;
+}
+
+.slide-in-right {
+  animation: slideInRight var(--transition-medium) ease-out;
+}
+
+.scale-in {
+  animation: scaleIn var(--transition-medium) ease-out;
+}
+
+.hover-lift {
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.hover-glow {
+  transition: box-shadow var(--transition-medium);
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 20px var(--accent-light);
+}
+
+/* Microsoft Edge-style Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--text-tertiary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+/* Enhanced Keyframe Animations */
+@keyframes fadeIn {
+  from { 
+    opacity: 0; 
+  }
+  to { 
+    opacity: 1; 
+  }
+}
+
+@keyframes slideUp {
+  from { 
+    transform: translateY(30px); 
+    opacity: 0; 
+  }
+  to { 
+    transform: translateY(0); 
+    opacity: 1; 
+  }
+}
+
+@keyframes slideInLeft {
+  from { 
+    transform: translateX(-30px); 
+    opacity: 0; 
+  }
+  to { 
+    transform: translateX(0); 
+    opacity: 1; 
+  }
+}
+
+@keyframes slideInRight {
+  from { 
+    transform: translateX(30px); 
+    opacity: 0; 
+  }
+  to { 
+    transform: translateX(0); 
+    opacity: 1; 
+  }
+}
+
+@keyframes scaleIn {
+  from { 
+    transform: scale(0.9); 
+    opacity: 0; 
+  }
+  to { 
+    transform: scale(1); 
+    opacity: 1; 
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { 
+    opacity: 1; 
+  }
+  50% { 
+    opacity: 0.5; 
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+/* Loading States */
+.loading-shimmer {
+  background: linear-gradient(90deg, var(--bg-secondary) 25%, var(--bg-tertiary) 50%, var(--bg-secondary) 75%);
+  background-size: 200px 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Focus States for Accessibility */
+.focus-ring:focus {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+/* Responsive Design Utilities */
+@media (max-width: 768px) {
+  :root {
+    --container-padding: 1rem;
+    --content-spacing: 1.5rem;
+    --card-spacing: 1rem;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}
+

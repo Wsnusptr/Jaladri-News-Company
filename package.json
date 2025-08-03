@@ -1,0 +1,40 @@
+{
+  "name": "news-website-project",
+  "private": true,
+  "description": "Monorepo for the news website project",
+  "scripts": {
+    "dev": "dotenv -- pnpm --parallel --filter \"./apps/*\" dev",
+    "web": "pnpm --filter web dev",
+    "cms": "pnpm --filter cms dev",
+    "build": "pnpm --parallel --filter \"./apps/*\" build",
+    "start": "pnpm --parallel --filter \"./apps/*\" start",
+    "start:web": "pnpm --filter web start",
+    "start:cms": "pnpm --filter cms start",
+    "build:web": "pnpm --filter web build",
+    "build:cms": "pnpm --filter cms build",
+    "deploy": "pnpm install --frozen-lockfile && pnpm prisma:generate && pnpm prisma:migrate && pnpm build",
+    "pm2:start": "pm2 start ecosystem.config.js",
+    "pm2:stop": "pm2 stop ecosystem.config.js",
+    "pm2:restart": "pm2 restart ecosystem.config.js",
+    "pm2:delete": "pm2 delete ecosystem.config.js",
+    "prisma:generate": "dotenv -- pnpm --filter @repo/db db:generate",
+    "prisma:migrate": "dotenv -- pnpm --filter @repo/db db:migrate",
+    "prisma:seed": "dotenv -- pnpm --filter @repo/db db:seed",
+    "prisma:reset": "dotenv -- pnpm --filter @repo/db exec prisma migrate reset",
+    "db:studio": "dotenv -- pnpm --filter @repo/db exec prisma studio",
+    "test:db": "dotenv -- pnpm --filter @repo/db exec ts-node test-articles.ts",
+    "test:api": "dotenv -- pnpm --filter @repo/db exec ts-node test-api.ts"
+  },
+  "devDependencies": {
+    "axios": "^1.11.0",
+    "dotenv-cli": "^7.4.4",
+    "prisma": "^6.12.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  },
+  "packageManager": "pnpm@9.5.0",
+  "dependencies": {
+    "dotenv": "^17.2.1",
+    "pg": "^8.16.3"
+  }
+}

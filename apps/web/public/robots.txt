@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://jaladri-news.com/sitemap.xml
+
+# Disallow admin and private areas
+Disallow: /admin/
+Disallow: /api/
+Disallow: /uploads/
+Disallow: /_next/
+
+# Allow important pages
+Allow: /
+Allow: /news/
+Allow: /kategori/
+Allow: /live-tv/
