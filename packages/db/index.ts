@@ -206,5 +206,5 @@ export async function deleteLiveTVComment(id: string, userId: string) {
   }
 }
 
-export * from '@prisma/client';
-export { PostType, Prisma } from '@prisma/client';
+// Export Prisma types and client
+export { PrismaClient, PostType, ArticleStatus, Role, NotificationType, Prisma } from '@prisma/client';
