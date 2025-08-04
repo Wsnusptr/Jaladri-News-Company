@@ -8,7 +8,10 @@ const nextConfig = {
 
   webpack: (config, { isServer }) => {
     if (isServer) {
-      config.externals.push('@prisma/client')
+      // Don't externalize @prisma/client in server bundles
+      config.externals = config.externals.filter(
+        (external) => external !== '@prisma/client'
+      );
     }
     return config
   },

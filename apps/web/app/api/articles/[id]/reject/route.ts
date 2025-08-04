@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { prisma } from '@repo/db';
+import { prisma } from '@repo/db/client';
 import { notifyArticleRejected } from '@repo/db/notifications';
 
 // Header CORS untuk mengizinkan permintaan dari CMS
@@ -50,7 +50,7 @@ export async function POST(
     // For now, we'll update status to REJECTED
     const updatedArticle = await prisma.article.update({
       where: { id },
-      data: { 
+      data: {
         status: 'REJECTED',
         updatedAt: new Date()
       },
@@ -60,9 +60,9 @@ export async function POST(
     });
 
     return NextResponse.json(
-      { 
+      {
         message: "Artikel berhasil ditolak",
-        article: updatedArticle 
+        article: updatedArticle
       },
       { headers: corsHeaders }
     );

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/auth";
-import { prisma } from "@repo/db";
+import { prisma } from "@repo/db/client";
 
 export async function PATCH(
   request: NextRequest,

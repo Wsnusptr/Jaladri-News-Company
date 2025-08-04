@@ -3,7 +3,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { Role } from "@prisma/client";
 import bcrypt from "bcryptjs";
 import type { NextAuthConfig } from "next-auth";
-import { prisma } from "./index";
+import { prisma } from "./client";
 
 // This is the base config shared by both apps
 export const baseAuthOptions: Omit<NextAuthConfig, "pages"> = {

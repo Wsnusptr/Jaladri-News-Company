@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { prisma } from '@repo/db';
+import { prisma } from '@repo/db/client';
 
 // Handler untuk mengambil live TV streams yang sedang aktif
 export async function GET() {

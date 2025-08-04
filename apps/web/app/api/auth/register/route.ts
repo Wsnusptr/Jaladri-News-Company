@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { prisma } from "@repo/db";
+import { prisma } from "@repo/db/client";
 import bcrypt from "bcryptjs";
 
 export async function POST(request: Request) {

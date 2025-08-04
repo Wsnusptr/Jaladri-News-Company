@@ -1,7 +1,7 @@
 // api/articles/route.ts
 import { NextResponse, NextRequest } from 'next/server';
 import { PostType } from '@repo/db';
-import { prisma } from '@repo/db';
+import { prisma } from '@repo/db/client';
 import { generateUniqueSlug } from '@/lib/slug-utils';
 
 // Old generateSlug function removed - now using generateUniqueSlug utility

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/auth";
-import { prisma } from "@repo/db";
+import { prisma } from "@repo/db/client";
 import { generateUniqueSlug } from "@/lib/slug-utils";
 
 export async function POST(request: NextRequest) {

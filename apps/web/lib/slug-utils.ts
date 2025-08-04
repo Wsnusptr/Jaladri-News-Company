@@ -1,4 +1,4 @@
-import { prisma } from "@repo/db";
+import { prisma } from "@repo/db/client";
 
 export async function generateUniqueSlug(baseTitle: string): Promise<string> {
   const baseSlug = baseTitle

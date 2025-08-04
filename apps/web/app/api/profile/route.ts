@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { prisma } from '@repo/db';
+import { prisma } from '@repo/db/client';
 import { auth } from '@/auth';
 import bcrypt from 'bcryptjs';
 

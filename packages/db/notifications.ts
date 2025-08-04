@@ -1,4 +1,4 @@
-import { prisma } from './index';
+import { prisma } from './client';
 import { NotificationType } from '@prisma/client';
 
 interface CreateNotificationProps {
@@ -35,7 +35,7 @@ export async function createNotification({
         }
       }
     });
-    
+
     return notification;
   } catch (error) {
     console.error('Error creating notification:', error);
@@ -59,7 +59,7 @@ export async function getUserNotifications(userId: string, limit: number = 20) {
       orderBy: { createdAt: 'desc' },
       take: limit
     });
-    
+
     return notifications;
   } catch (error) {
     console.error('Error fetching notifications:', error);
@@ -70,13 +70,13 @@ export async function getUserNotifications(userId: string, limit: number = 20) {
 export async function markNotificationAsRead(notificationId: string, userId: string) {
   try {
     const notification = await prisma.notification.update({
-      where: { 
+      where: {
         id: notificationId,
         userId // Ensure user can only mark their own notifications
       },
       data: { isRead: true }
     });
-    
+
     return notification;
   } catch (error) {
     console.error('Error marking notification as read:', error);
@@ -87,13 +87,13 @@ export async function markNotificationAsRead(notificationId: string, userId: str
 export async function markAllNotificationsAsRead(userId: string) {
   try {
     const result = await prisma.notification.updateMany({
-      where: { 
+      where: {
         userId,
-        isRead: false 
+        isRead: false
       },
       data: { isRead: true }
     });
-    
+
     return result;
   } catch (error) {
     console.error('Error marking all notifications as read:', error);
@@ -104,12 +104,12 @@ export async function markAllNotificationsAsRead(userId: string) {
 export async function getUnreadNotificationCount(userId: string) {
   try {
     const count = await prisma.notification.count({
-      where: { 
+      where: {
         userId,
-        isRead: false 
+        isRead: false
       }
     });
-    
+
     return count;
   } catch (error) {
     console.error('Error getting unread notification count:', error);
@@ -120,12 +120,12 @@ export async function getUnreadNotificationCount(userId: string) {
 export async function deleteNotification(notificationId: string, userId: string) {
   try {
     const notification = await prisma.notification.delete({
-      where: { 
+      where: {
         id: notificationId,
         userId // Ensure user can only delete their own notifications
       }
     });
-    
+
     return notification;
   } catch (error) {
     console.error('Error deleting notification:', error);
@@ -140,11 +140,11 @@ export async function notifyArticleApproved(articleId: string) {
       where: { id: articleId },
       include: { author: true }
     });
-    
+
     if (!article || !article.authorId) {
       return null;
     }
-    
+
     return await createNotification({
       userId: article.authorId,
       title: '🎉 Artikel Anda Telah Disetujui!',
@@ -165,15 +165,15 @@ export async function notifyArticleRejected(articleId: string, reason?: string) 
       where: { id: articleId },
       include: { author: true }
     });
-    
+
     if (!article || !article.authorId) {
       return null;
     }
-    
-    const message = reason 
+
+    const message = reason
       ? `Artikel "${article.title}" tidak dapat dipublikasikan. Alasan: ${reason}. Silakan revisi dan kirim ulang.`
       : `Artikel "${article.title}" tidak dapat dipublikasikan saat ini. Silakan hubungi admin untuk informasi lebih lanjut.`;
-    
+
     return await createNotification({
       userId: article.authorId,
       title: '❌ Artikel Perlu Diperbaiki',
@@ -187,4 +187,4 @@ export async function notifyArticleRejected(articleId: string, reason?: string) 
   }
 }
 
-export * from '@prisma/client';
+// Notification types are already exported from index.ts

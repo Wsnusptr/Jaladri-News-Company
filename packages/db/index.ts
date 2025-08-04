@@ -1,15 +1,14 @@
 // packages/db/index.ts
-import { PrismaClient, PostType, ArticleStatus, Prisma } from '@prisma/client'; // Impor enum secara langsung
+import { PrismaClient, PostType, ArticleStatus, Role, NotificationType, Prisma } from '@prisma/client';
+import { prisma } from './client';
 
-const globalForPrisma = globalThis as unknown as {
-  prisma: PrismaClient | undefined;
-};
+// Re-export prisma instance
+export { prisma };
 
-export const prisma =
-  globalForPrisma.prisma ??
-  new PrismaClient();
+// Export PrismaClient constructor to fix "PrismaClient is not a constructor" error
+export { PrismaClient, PostType, ArticleStatus, Role, NotificationType, Prisma };
 
-if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma;
+// PrismaClient will be exported at the end of file
 
 // -- FUNGSI-FUNGSI PENGAMBILAN DATA ANDA SEKARANG ADA DI SINI --
 
@@ -205,6 +204,3 @@ export async function deleteLiveTVComment(id: string, userId: string) {
     return { success: false, error: 'Database error' };
   }
 }
-
-// Export Prisma types and client
-export { PrismaClient, PostType, ArticleStatus, Role, NotificationType, Prisma } from '@prisma/client';

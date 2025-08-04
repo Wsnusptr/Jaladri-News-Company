@@ -1,6 +1,6 @@
 // apps/web/app/api/articles/[id]/route.ts
 import { NextResponse } from 'next/server';
-import { prisma } from '@repo/db';
+import { prisma } from '@repo/db/client';
 import { notifyArticleApproved, notifyArticleRejected } from '@repo/db/notifications';
 import { generateUniqueSlugExcluding } from '@/lib/slug-utils';
 
